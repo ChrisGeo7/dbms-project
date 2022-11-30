@@ -1,13 +1,13 @@
 import React from "react";
 import TopNav from "./TopNav";
 
-const Home = (props) => {
+const Agent = (props) => {
   return (
     <>
       <TopNav />
-      <h1>Home</h1>
+      <h1>Agent</h1>
     </>
   );
 };
 
-export default Home;
+export default Agent;
