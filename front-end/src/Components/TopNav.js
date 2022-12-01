@@ -16,7 +16,7 @@ const TopNav = () => {
               <LinkContainer to="/">
                 <Nav.Link>Home</Nav.Link>
               </LinkContainer>
-              <NavDropdown title="Roles" id="basic-nav-dropdown">
+              <NavDropdown title="Management" id="basic-nav-dropdown">
                 <LinkContainer to="/manager">
                   <NavDropdown.Item>Management</NavDropdown.Item>
                 </LinkContainer>
@@ -27,8 +27,20 @@ const TopNav = () => {
                   <NavDropdown.Item>Public</NavDropdown.Item>
                 </LinkContainer>
               </NavDropdown>
+              <NavDropdown title="Public" id="basic-nav-dropdown">
+                <LinkContainer to="/query1">
+                  <NavDropdown.Item>Booking Trend</NavDropdown.Item>
+                </LinkContainer>
+                <LinkContainer to="/query2">
+                  <NavDropdown.Item>Market Valuation Trend</NavDropdown.Item>
+                </LinkContainer>
+              </NavDropdown>
 
-              <Nav.Link>About</Nav.Link>
+              <NavDropdown title="Agent" id="basic-nav-dropdown">
+                <LinkContainer to="/manager">
+                  <NavDropdown.Item>Management</NavDropdown.Item>
+                </LinkContainer>
+              </NavDropdown>
 
               <Nav.Link
                 href="https://www.kaggle.com/datasets/davidcariboo/player-scores"

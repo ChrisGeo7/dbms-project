@@ -4,6 +4,8 @@ import Agent from "./Components/Agent";
 import Manager from "./Components/Manager";
 import Public from "./Components/Public";
 import Home from "./Components/Home";
+import Query1 from "./Components/Query1";
+import Query2 from "./Components/Query2";
 
 function App() {
   return (
@@ -13,6 +15,8 @@ function App() {
         <Route path="/manager" element={<Manager />} />
         <Route path="/public" element={<Public />} />
         <Route path="/agent" element={<Agent />} />
+        <Route path="/query1" element={<Query1 />} />
+        <Route path="/query2" element={<Query2 />} />
       </Routes>
       {/* <CompetitionList /> */}
     </div>

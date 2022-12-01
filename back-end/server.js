@@ -79,7 +79,9 @@ app.get("/clubs", (req, res) => {
         connectionString: "oracle.cise.ufl.edu/orcl",
       });
 
-      const data = await con.execute(`SELECT * FROM "CHRISTY.GEORGE".CLUB`);
+      const data = await con.execute(
+        `SELECT * FROM "CHRISTY.GEORGE".CLUB WHERE DOMESTIC_COMPETITION_ID = '${req.query.id}'`
+      );
       return data;
     } catch (err) {
       console.log(err);
@@ -142,6 +144,63 @@ app.get("/query1", (req, res) => {
     }
   }
   fetchQuery1()
+    .then((dbres) => {
+      res.send(dbres);
+    })
+    .catch((err) => {
+      res.send(err);
+    });
+});
+
+app.get("/query2", (req, res) => {
+  async function fetchQuery2() {
+    let con;
+
+    try {
+      con = await oracledb.getConnection({
+        user: "omkarparab",
+        password: "8HiVpVxMCvT6eumbL3Esnzi3",
+        connectionString: "oracle.cise.ufl.edu/orcl",
+      });
+
+      const data = await con.execute(
+        `SELECT A.PLAYER_ID, EXTRACT(YEAR FROM APPEARANCE_DATE) AS YEAR, SUM(GOALS+ASSISTS)AS GA, E.MV/1000000 AS EMV FROM "CHRISTY.GEORGE".APPEARANCE A, (SELECT PLAYER_ID, EXTRACT(YEAR FROM VALUATION_DATE) AS VD, AVG(MARKET_VALUE) MV FROM "CHRISTY.GEORGE".PLAYER_VALUATION GROUP BY PLAYER_ID,  EXTRACT(YEAR FROM VALUATION_DATE)) E WHERE A.PLAYER_ID IN (SELECT PLAYER_ID FROM "CHRISTY.GEORGE".PLAYER WHERE PLAYER_ID ='${req.query.id}') AND A.PLAYER_ID = E.PLAYER_ID AND EXTRACT(YEAR FROM A.APPEARANCE_DATE) =  E.VD GROUP BY A.PLAYER_ID, EXTRACT(YEAR FROM A.APPEARANCE_DATE),E.MV ORDER BY 2
+        `
+      );
+      return data;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  fetchQuery2()
+    .then((dbres) => {
+      res.send(dbres);
+    })
+    .catch((err) => {
+      res.send(err);
+    });
+});
+
+app.get("/players", (req, res) => {
+  async function fetchPlayers() {
+    let con;
+
+    try {
+      con = await oracledb.getConnection({
+        user: "omkarparab",
+        password: "8HiVpVxMCvT6eumbL3Esnzi3",
+        connectionString: "oracle.cise.ufl.edu/orcl",
+      });
+
+      const data = await con.execute(
+        `SELECT * FROM "CHRISTY.GEORGE".PLAYER WHERE CURRENT_CLUB_ID = '${req.query.id}'`
+      );
+      return data;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  fetchPlayers()
     .then((dbres) => {
       res.send(dbres);
     })
