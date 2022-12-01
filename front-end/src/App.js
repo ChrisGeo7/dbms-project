@@ -6,6 +6,7 @@ import Public from "./Components/Public";
 import Home from "./Components/Home";
 import Query1 from "./Components/Query1";
 import Query2 from "./Components/Query2";
+import Query3 from "./Components/Query3";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/agent" element={<Agent />} />
         <Route path="/query1" element={<Query1 />} />
         <Route path="/query2" element={<Query2 />} />
+        <Route path="/query3" element={<Query3 />} />
       </Routes>
       {/* <CompetitionList /> */}
     </div>

@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import "chart.js/auto";
 import { Chart } from "react-chartjs-2";
 
-const Query2Graph = ({ labels, graphGA, graphEMV }) => {
-  console.log(labels, graphGA, graphEMV);
+const Query2Graph = ({ labels, graph1Data, graph2Data }) => {
+  //   console.log(labels, graphGA, graphEMV);
 
   const options = {
     plugins: {
@@ -27,13 +27,13 @@ const Query2Graph = ({ labels, graphGA, graphEMV }) => {
     labels: labels,
     datasets: [
       {
-        label: "Goals + Assists",
-        data: graphGA,
+        label: "Competition 1",
+        data: graph1Data,
         backgroundColor: "rgb(255, 201, 0)",
       },
       {
-        label: "Market Valuation",
-        data: graphEMV,
+        label: "Competition 2",
+        data: graph2Data,
         // data: [54, 53, 42, 54, 53, 42, 54, 53, 42],
         backgroundColor: "rgb(190, 0, 0 )",
       },

@@ -40,34 +40,6 @@ app.get("/competitions", (req, res) => {
     });
 });
 
-app.get("/competition", (req, res) => {
-  async function fetchCompetition() {
-    let con;
-
-    try {
-      con = await oracledb.getConnection({
-        user: "omkarparab",
-        password: "8HiVpVxMCvT6eumbL3Esnzi3",
-        connectionString: "oracle.cise.ufl.edu/orcl",
-      });
-
-      const data = await con.execute(
-        `SELECT * FROM "CHRISTY.GEORGE".${req.query.name} WHERE HOME_CLUB_ID =2441`
-      );
-      return data;
-    } catch (err) {
-      console.log(err);
-    }
-  }
-  fetchCompetition()
-    .then((dbres) => {
-      res.send(dbres);
-    })
-    .catch((err) => {
-      res.send(err);
-    });
-});
-
 app.get("/clubs", (req, res) => {
   async function fetchClubs() {
     let con;
@@ -88,6 +60,34 @@ app.get("/clubs", (req, res) => {
     }
   }
   fetchClubs()
+    .then((dbres) => {
+      res.send(dbres);
+    })
+    .catch((err) => {
+      res.send(err);
+    });
+});
+
+app.get("/players", (req, res) => {
+  async function fetchPlayers() {
+    let con;
+
+    try {
+      con = await oracledb.getConnection({
+        user: "omkarparab",
+        password: "8HiVpVxMCvT6eumbL3Esnzi3",
+        connectionString: "oracle.cise.ufl.edu/orcl",
+      });
+
+      const data = await con.execute(
+        `SELECT * FROM "CHRISTY.GEORGE".PLAYER WHERE CURRENT_CLUB_ID = '${req.query.id}'`
+      );
+      return data;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  fetchPlayers()
     .then((dbres) => {
       res.send(dbres);
     })
@@ -181,8 +181,8 @@ app.get("/query2", (req, res) => {
     });
 });
 
-app.get("/players", (req, res) => {
-  async function fetchPlayers() {
+app.get("/query3", (req, res) => {
+  async function fetchQuery3() {
     let con;
 
     try {
@@ -193,14 +193,20 @@ app.get("/players", (req, res) => {
       });
 
       const data = await con.execute(
-        `SELECT * FROM "CHRISTY.GEORGE".PLAYER WHERE CURRENT_CLUB_ID = '${req.query.id}'`
+        `SELECT EXTRACT(YEAR FROM GAME_DATE) YEAR, SUM(HOME_CLUB_GOALS + AWAY_CLUB_GOALS) AS GOALS FROM "CHRISTY.GEORGE".GAME WHERE COMPETITION_ID = '${req.query.id}' GROUP BY EXTRACT(YEAR FROM GAME_DATE) ORDER BY 1
+        `
+        // `SELECT WIN.CLUB_ID, WIN.YR, ROUND(WIN.WON*100/TOT.TOTAL,2) AS WINPERCENTAGE FROM
+        // (SELECT CLUB_ID, EXTRACT(YEAR FROM GAME_DATE) AS YR, COUNT(*) AS WON FROM "CHRISTY.GEORGE".GAME, (SELECT CLUB_ID, CLUB_NAME FROM "CHRISTY.GEORGE".CLUB) CB WHERE ((HOME_CLUB_ID = CB.CLUB_ID AND HOME_CLUB_GOALS > AWAY_CLUB_GOALS) OR (AWAY_CLUB_ID = CB.CLUB_ID AND HOME_CLUB_GOALS < AWAY_CLUB_GOALS)) GROUP BY CLUB_ID, EXTRACT(YEAR FROM GAME_DATE)) WIN,
+        // (SELECT CLUB_ID, EXTRACT(YEAR FROM GAME_DATE) AS YR, COUNT(*) AS TOTAL  FROM "CHRISTY.GEORGE".GAME, (SELECT CLUB_ID, CLUB_NAME FROM "CHRISTY.GEORGE".CLUB) CB WHERE HOME_CLUB_ID = CB.CLUB_ID OR AWAY_CLUB_ID = CB.CLUB_ID GROUP BY CLUB_ID, EXTRACT(YEAR FROM GAME_DATE)) TOT
+        // WHERE WIN.CLUB_ID = TOT.CLUB_ID AND WIN.YR = TOT.YR
+        // `
       );
       return data;
     } catch (err) {
       console.log(err);
     }
   }
-  fetchPlayers()
+  fetchQuery3()
     .then((dbres) => {
       res.send(dbres);
     })

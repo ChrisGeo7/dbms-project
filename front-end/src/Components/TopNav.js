@@ -17,28 +17,19 @@ const TopNav = () => {
                 <Nav.Link>Home</Nav.Link>
               </LinkContainer>
               <NavDropdown title="Management" id="basic-nav-dropdown">
-                <LinkContainer to="/manager">
-                  <NavDropdown.Item>Management</NavDropdown.Item>
-                </LinkContainer>
-                <LinkContainer to="/agent">
-                  <NavDropdown.Item>Agents</NavDropdown.Item>
-                </LinkContainer>
-                <LinkContainer to="/public">
-                  <NavDropdown.Item>Public</NavDropdown.Item>
+                <LinkContainer to="/query3">
+                  <NavDropdown.Item>Trend in Goals</NavDropdown.Item>
                 </LinkContainer>
               </NavDropdown>
               <NavDropdown title="Public" id="basic-nav-dropdown">
                 <LinkContainer to="/query1">
                   <NavDropdown.Item>Booking Trend</NavDropdown.Item>
                 </LinkContainer>
-                <LinkContainer to="/query2">
-                  <NavDropdown.Item>Market Valuation Trend</NavDropdown.Item>
-                </LinkContainer>
               </NavDropdown>
 
               <NavDropdown title="Agent" id="basic-nav-dropdown">
-                <LinkContainer to="/manager">
-                  <NavDropdown.Item>Management</NavDropdown.Item>
+                <LinkContainer to="/query2">
+                  <NavDropdown.Item>Market Valuation Trend</NavDropdown.Item>
                 </LinkContainer>
               </NavDropdown>
 

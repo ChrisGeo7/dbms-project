@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "chart.js/auto";
 import { Chart } from "react-chartjs-2";
 
-const LineGraph = ({ labels, graphRed, graphYellow }) => {
+const Query1Graph = ({ labels, graphRed, graphYellow }) => {
   console.log(labels, graphRed);
 
   const options = {
@@ -46,4 +46,4 @@ const LineGraph = ({ labels, graphRed, graphYellow }) => {
   );
 };
 
-export default LineGraph;
+export default Query1Graph;
