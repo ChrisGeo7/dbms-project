@@ -27,8 +27,17 @@ app.get("/competitions", (req, res) => {
         `SELECT * FROM "CHRISTY.GEORGE".COMPETITION`
       );
       return data;
+      oracledb.close();
     } catch (err) {
       console.log(err);
+    } finally {
+      if (con) {
+        try {
+          await con.close();
+        } catch (err) {
+          console.error(err);
+        }
+      }
     }
   }
   fetchCompetitions()
@@ -57,6 +66,14 @@ app.get("/clubs", (req, res) => {
       return data;
     } catch (err) {
       console.log(err);
+    } finally {
+      if (con) {
+        try {
+          await con.close();
+        } catch (err) {
+          console.error(err);
+        }
+      }
     }
   }
   fetchClubs()
@@ -85,6 +102,14 @@ app.get("/club", (req, res) => {
       return data;
     } catch (err) {
       console.log(err);
+    } finally {
+      if (con) {
+        try {
+          await con.close();
+        } catch (err) {
+          console.error(err);
+        }
+      }
     }
   }
   fetchClubs()
@@ -113,6 +138,14 @@ app.get("/players", (req, res) => {
       return data;
     } catch (err) {
       console.log(err);
+    } finally {
+      if (con) {
+        try {
+          await con.close();
+        } catch (err) {
+          console.error(err);
+        }
+      }
     }
   }
   fetchPlayers()
@@ -141,6 +174,14 @@ app.get("/query", (req, res) => {
       return data;
     } catch (err) {
       console.log(err);
+    } finally {
+      if (con) {
+        try {
+          await con.close();
+        } catch (err) {
+          console.error(err);
+        }
+      }
     }
   }
   fetchQuery()
@@ -169,6 +210,14 @@ app.get("/query1", (req, res) => {
       return data;
     } catch (err) {
       console.log(err);
+    } finally {
+      if (con) {
+        try {
+          await con.close();
+        } catch (err) {
+          console.error(err);
+        }
+      }
     }
   }
   fetchQuery1()
@@ -198,6 +247,14 @@ app.get("/query2", (req, res) => {
       return data;
     } catch (err) {
       console.log(err);
+    } finally {
+      if (con) {
+        try {
+          await con.close();
+        } catch (err) {
+          console.error(err);
+        }
+      }
     }
   }
   fetchQuery2()
@@ -227,6 +284,14 @@ app.get("/query3", (req, res) => {
       return data;
     } catch (err) {
       console.log(err);
+    } finally {
+      if (con) {
+        try {
+          await con.close();
+        } catch (err) {
+          console.error(err);
+        }
+      }
     }
   }
   fetchQuery3()
@@ -257,6 +322,14 @@ app.get("/query4/gb", (req, res) => {
       return data;
     } catch (err) {
       console.log(err);
+    } finally {
+      if (con) {
+        try {
+          await con.close();
+        } catch (err) {
+          console.error(err);
+        }
+      }
     }
   }
   fetchQuery4()
@@ -287,6 +360,14 @@ app.get("/query4/gb1", (req, res) => {
       return data;
     } catch (err) {
       console.log(err);
+    } finally {
+      if (con) {
+        try {
+          await con.close();
+        } catch (err) {
+          console.error(err);
+        }
+      }
     }
   }
   fetchQuery4()
@@ -317,6 +398,14 @@ app.get("/query4/es1", (req, res) => {
       return data;
     } catch (err) {
       console.log(err);
+    } finally {
+      if (con) {
+        try {
+          await con.close();
+        } catch (err) {
+          console.error(err);
+        }
+      }
     }
   }
   fetchQuery4()
@@ -347,6 +436,14 @@ app.get("/query4/l1", (req, res) => {
       return data;
     } catch (err) {
       console.log(err);
+    } finally {
+      if (con) {
+        try {
+          await con.close();
+        } catch (err) {
+          console.error(err);
+        }
+      }
     }
   }
   fetchQuery4()
@@ -377,6 +474,14 @@ app.get("/query4/it1", (req, res) => {
       return data;
     } catch (err) {
       console.log(err);
+    } finally {
+      if (con) {
+        try {
+          await con.close();
+        } catch (err) {
+          console.error(err);
+        }
+      }
     }
   }
   fetchQuery4()
@@ -407,6 +512,14 @@ app.get("/query4/fr1", (req, res) => {
       return data;
     } catch (err) {
       console.log(err);
+    } finally {
+      if (con) {
+        try {
+          await con.close();
+        } catch (err) {
+          console.error(err);
+        }
+      }
     }
   }
   fetchQuery4()
@@ -439,6 +552,14 @@ app.get("/query5", (req, res) => {
       return data;
     } catch (err) {
       console.log(err);
+    } finally {
+      if (con) {
+        try {
+          await con.close();
+        } catch (err) {
+          console.error(err);
+        }
+      }
     }
   }
   fetchQuery5()
@@ -478,6 +599,14 @@ app.get("/count", (req, res) => {
       return data;
     } catch (err) {
       console.log(err);
+    } finally {
+      if (con) {
+        try {
+          await con.close();
+        } catch (err) {
+          console.error(err);
+        }
+      }
     }
   }
   fetchCount()
