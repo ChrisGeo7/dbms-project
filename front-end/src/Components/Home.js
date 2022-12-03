@@ -1,11 +1,13 @@
 import React from "react";
 import TopNav from "./TopNav";
-
+import Container from "react-bootstrap/Container";
 const Home = (props) => {
   return (
     <>
       <TopNav />
-      <h1>Home</h1>
+      <Container>
+        <h1>Home</h1>
+      </Container>
     </>
   );
 };

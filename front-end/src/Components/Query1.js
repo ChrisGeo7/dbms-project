@@ -33,6 +33,7 @@ const Query1 = (props) => {
     <>
       {" "}
       <TopNav />
+      <br />
       <Container>
         {" "}
         <h5>Trend in number of bookings before and after VAR was introduced</h5>

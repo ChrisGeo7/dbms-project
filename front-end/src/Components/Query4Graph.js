@@ -2,7 +2,14 @@ import React, { useState } from "react";
 import "chart.js/auto";
 import { Chart } from "react-chartjs-2";
 
-const Query2Graph = ({ labels, graph1Data, graph2Data }) => {
+const Query4Graph = ({
+  labels,
+  graphgbData,
+  graphesData,
+  graphlData,
+  graphitData,
+  graphfrData,
+}) => {
   //   console.log(labels, graphGA, graphEMV);
 
   const options = {
@@ -27,17 +34,34 @@ const Query2Graph = ({ labels, graph1Data, graph2Data }) => {
     labels: labels,
     datasets: [
       {
-        label: "Competition 1",
-        data: graph1Data,
+        label: "Premier League",
+        data: graphgbData,
         backgroundColor: "rgb(231, 76, 60)",
         borderColor: "rgb(231, 76, 60)",
       },
       {
-        label: "Competition 2",
-        data: graph2Data,
-        // data: [54, 53, 42, 54, 53, 42, 54, 53, 42],
+        label: "La Liga",
+        data: graphesData,
+        backgroundColor: "rgb(241, 196, 15 )",
+        borderColor: "rgb(241, 196, 15)",
+      },
+      {
+        label: "Bundesliga",
+        data: graphlData,
         backgroundColor: "rgb(41, 128, 185  )",
         borderColor: "rgb(41, 128, 185  )",
+      },
+      {
+        label: "Serie A",
+        data: graphitData,
+        backgroundColor: "rgb(26, 188, 156 )",
+        borderColor: "rgb(26, 188, 156 )",
+      },
+      {
+        label: "Ligue 1",
+        data: graphfrData,
+        backgroundColor: "rgb(255, 183, 192)",
+        borderColor: "rgb(255, 183, 192)",
       },
     ],
   };
@@ -48,4 +72,4 @@ const Query2Graph = ({ labels, graph1Data, graph2Data }) => {
   );
 };
 
-export default Query2Graph;
+export default Query4Graph;

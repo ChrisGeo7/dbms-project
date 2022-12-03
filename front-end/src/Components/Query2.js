@@ -68,7 +68,8 @@ const Query2 = (props) => {
   return (
     <>
       {console.log(playerId)}
-      <TopNav />{" "}
+      <TopNav />
+      <br />
       <Container>
         <h5>
           Trend in the market valuation of players with respect to the number of

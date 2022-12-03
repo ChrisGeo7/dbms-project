@@ -2,7 +2,14 @@ import React, { useState } from "react";
 import "chart.js/auto";
 import { Chart } from "react-chartjs-2";
 
-const Query2Graph = ({ labels, graph1Data, graph2Data }) => {
+const Query6Graph = ({
+  labels,
+  graph1Data,
+  graph2Data,
+  graph3Data,
+  graph4Data,
+  graph5Data,
+}) => {
   //   console.log(labels, graphGA, graphEMV);
 
   const options = {
@@ -27,17 +34,34 @@ const Query2Graph = ({ labels, graph1Data, graph2Data }) => {
     labels: labels,
     datasets: [
       {
-        label: "Competition 1",
+        label: "Player1",
         data: graph1Data,
         backgroundColor: "rgb(231, 76, 60)",
         borderColor: "rgb(231, 76, 60)",
       },
       {
-        label: "Competition 2",
+        label: "Player2",
         data: graph2Data,
-        // data: [54, 53, 42, 54, 53, 42, 54, 53, 42],
+        backgroundColor: "rgb(241, 196, 15 )",
+        borderColor: "rgb(241, 196, 15)",
+      },
+      {
+        label: "Player3",
+        data: graph3Data,
         backgroundColor: "rgb(41, 128, 185  )",
         borderColor: "rgb(41, 128, 185  )",
+      },
+      {
+        label: "Player4",
+        data: graph4Data,
+        backgroundColor: "rgb(26, 188, 156 )",
+        borderColor: "rgb(26, 188, 156 )",
+      },
+      {
+        label: "Player5",
+        data: graph5Data,
+        backgroundColor: "rgb(255, 183, 192)",
+        borderColor: "rgb(255, 183, 192)",
       },
     ],
   };
@@ -48,4 +72,4 @@ const Query2Graph = ({ labels, graph1Data, graph2Data }) => {
   );
 };
 
-export default Query2Graph;
+export default Query6Graph;

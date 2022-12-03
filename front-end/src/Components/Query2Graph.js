@@ -15,10 +15,10 @@ const Query2Graph = ({ labels, graphGA, graphEMV }) => {
     responsive: true,
     scales: {
       x: {
-        stacked: true,
+        stacked: false,
       },
       y: {
-        stacked: true,
+        stacked: false,
       },
     },
   };
@@ -29,13 +29,15 @@ const Query2Graph = ({ labels, graphGA, graphEMV }) => {
       {
         label: "Goals + Assists",
         data: graphGA,
-        backgroundColor: "rgb(255, 201, 0)",
+        backgroundColor: "rgb(231, 76, 60)",
+        borderColor: "rgb(231, 76, 60)",
       },
       {
         label: "Market Valuation",
         data: graphEMV,
         // data: [54, 53, 42, 54, 53, 42, 54, 53, 42],
-        backgroundColor: "rgb(190, 0, 0 )",
+        backgroundColor: "rgb(41, 128, 185  )",
+        borderColor: "rgb(41, 128, 185  )",
       },
     ],
   };

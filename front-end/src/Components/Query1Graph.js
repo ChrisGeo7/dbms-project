@@ -29,13 +29,13 @@ const Query1Graph = ({ labels, graphRed, graphYellow }) => {
       {
         label: "Yellow",
         data: graphYellow,
-        backgroundColor: "rgb(255, 201, 0)",
+        backgroundColor: "rgb(255, 195, 0)",
       },
       {
         label: "Red",
         data: graphRed,
         // data: [54, 53, 42, 54, 53, 42, 54, 53, 42],
-        backgroundColor: "rgb(190, 0, 0 )",
+        backgroundColor: "rgb(199, 0, 57)",
       },
     ],
   };

@@ -3,8 +3,6 @@ import "chart.js/auto";
 import { Chart } from "react-chartjs-2";
 
 const Query2Graph = ({ labels, graph1Data, graph2Data }) => {
-  //   console.log(labels, graphGA, graphEMV);
-
   const options = {
     plugins: {
       title: {
@@ -27,15 +25,14 @@ const Query2Graph = ({ labels, graph1Data, graph2Data }) => {
     labels: labels,
     datasets: [
       {
-        label: "Competition 1",
+        label: "Team 1",
         data: graph1Data,
         backgroundColor: "rgb(231, 76, 60)",
         borderColor: "rgb(231, 76, 60)",
       },
       {
-        label: "Competition 2",
+        label: "Team 2",
         data: graph2Data,
-        // data: [54, 53, 42, 54, 53, 42, 54, 53, 42],
         backgroundColor: "rgb(41, 128, 185  )",
         borderColor: "rgb(41, 128, 185  )",
       },

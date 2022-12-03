@@ -5,28 +5,27 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
-import Query3Graph from "./Query3Graph";
+import Query5Graph from "./Query5Graph";
 import TopNav from "./TopNav";
 
-const ClubList = (props) => {
-  const [competitionList, setCompetitionList] = useState([]);
+const Query5 = (props) => {
+  const [clubList, setClubList] = useState([]);
   const [gen1Data, setGen1Data] = useState([]);
   const [gen2Data, setGen2Data] = useState([]);
-
-  const [competition1Id, setCompetition1Id] = useState("");
-  const [competition2Id, setCompetition2Id] = useState("");
   const [optionflag, setOptionFlag] = useState(false);
   const [flag, setFlag] = useState(false);
   const [buttonFlag, setButtonFlag] = useState(false);
+  const [club1Id, setClub1Id] = useState("");
+  const [club2Id, setClub2Id] = useState("");
   var arrLabels = [];
-  var arr1Goals = [];
-  var arr2Goals = [];
+  var arr1 = [];
+  var arr2 = [];
 
   useEffect(() => {
-    axios("http://localhost:5000/competitions")
+    axios("http://localhost:5000/club")
       .then((response) => {
         if (response.status === 200) {
-          setCompetitionList(response.data.rows);
+          setClubList(response.data.rows);
         }
       })
       .then(() => {})
@@ -34,57 +33,50 @@ const ClubList = (props) => {
   }, []);
 
   gen1Data.forEach(function (gen1Data) {
-    arrLabels.push(gen1Data.YEAR);
-    arr1Goals.push(gen1Data.GOALS);
+    arrLabels.push(gen1Data.YR);
+    arr1.push(gen1Data.WINPERCENTAGE);
   });
 
   gen2Data.forEach(function (gen2Data) {
-    arr2Goals.push(gen2Data.GOALS);
+    arr2.push(gen2Data.WINPERCENTAGE);
   });
-
   return (
     <>
       <TopNav />
       <br />
       <Container>
         <h5>
-          Trend in the number of goals scored across various competitions{" "}
+          Comparison Graph of win percentages between two different clubs{" "}
         </h5>{" "}
         <Row>
           <Col xs={3}>
             <Form.Select
-              value={competition1Id}
-              aria-label="Default select example"
+              value={club1Id}
               onChange={(e) => {
-                setCompetition1Id(e.target.value);
+                setClub1Id(e.target.value);
                 setOptionFlag(true);
               }}
             >
-              <option>Select Competition 1</option>
-              {competitionList.length > 0 &&
-                competitionList.map((item, i) => (
-                  <option value={item.COMPETITION_ID}>
-                    {item.COMPETITION_NAME}
-                  </option>
+              <option>Select Club 1</option>
+              {clubList.length > 0 &&
+                clubList.map((item, i) => (
+                  <option value={item.CLUB_ID}>{item.CLUB_NAME}</option>
                 ))}
             </Form.Select>
           </Col>
           {optionflag && (
             <Col xs={3}>
               <Form.Select
-                value={competition2Id}
-                aria-label="Default select example"
+                value={club2Id}
                 onChange={(e) => {
-                  setCompetition2Id(e.target.value);
+                  setClub2Id(e.target.value);
                   setButtonFlag(true);
                 }}
               >
-                <option>Select Competition 2</option>
-                {competitionList.length > 0 &&
-                  competitionList.map((item, i) => (
-                    <option value={item.COMPETITION_ID}>
-                      {item.COMPETITION_NAME}
-                    </option>
+                <option>Select Club 2</option>
+                {clubList.length > 0 &&
+                  clubList.map((item, i) => (
+                    <option value={item.CLUB_ID}>{item.CLUB_NAME}</option>
                   ))}
               </Form.Select>
             </Col>
@@ -93,7 +85,7 @@ const ClubList = (props) => {
             <Col>
               <Button
                 onClick={() => {
-                  axios(`http://localhost:5000/query3/?id=${competition1Id}`)
+                  axios(`http://localhost:5000/query5/?id=${club1Id}`)
                     .then((response) => {
                       if (response.status === 200) {
                         setGen1Data(response.data.rows);
@@ -102,7 +94,7 @@ const ClubList = (props) => {
                     .then(() => {})
                     .catch((err) => {});
 
-                  axios(`http://localhost:5000/query3/?id=${competition2Id}`)
+                  axios(`http://localhost:5000/query5/?id=${club2Id}`)
                     .then((response) => {
                       if (response.status === 200) {
                         setGen2Data(response.data.rows);
@@ -121,15 +113,11 @@ const ClubList = (props) => {
         </Row>
         {console.log(gen1Data, gen2Data)}
         {flag && (
-          <Query3Graph
-            labels={arrLabels}
-            graph1Data={arr1Goals}
-            graph2Data={arr2Goals}
-          />
+          <Query5Graph labels={arrLabels} graph1Data={arr1} graph2Data={arr2} />
         )}
       </Container>
     </>
   );
 };
 
-export default ClubList;
+export default Query5;
