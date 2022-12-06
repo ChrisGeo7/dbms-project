@@ -266,6 +266,43 @@ app.get("/query1", (req, res) => {
     });
 });
 
+app.get("/query11", (req, res) => {
+  async function fetchQuery1() {
+    let con;
+
+    try {
+      con = await oracledb.getConnection({
+        user: "omkarparab",
+        password: "8HiVpVxMCvT6eumbL3Esnzi3",
+        connectionString: "oracle.cise.ufl.edu/orcl",
+      });
+
+      const data = await con.execute(
+        `select EXTRACT(year from appearance_date) as year,  sum(red_cards) as red_cards , sum(yellow_cards) as yellow_cards from 
+        "CHRISTY.GEORGE".appearance where appearance_date is not null AND competition_id='${req.query.id}' group by EXTRACT(year from appearance_date) order by 1`
+      );
+      return data;
+    } catch (err) {
+      console.log(err);
+    } finally {
+      if (con) {
+        try {
+          await con.close();
+        } catch (err) {
+          console.error(err);
+        }
+      }
+    }
+  }
+  fetchQuery1()
+    .then((dbres) => {
+      res.send(dbres);
+    })
+    .catch((err) => {
+      res.send(err);
+    });
+});
+
 app.get("/query2", (req, res) => {
   async function fetchQuery2() {
     let con;
@@ -315,8 +352,9 @@ app.get("/query3", (req, res) => {
       });
 
       const data = await con.execute(
-        `SELECT COMPETITION_NAME,EXTRACT(YEAR FROM GAME_DATE) YEAR, SUM(HOME_CLUB_GOALS + AWAY_CLUB_GOALS)AS GOALS , COUNT(GAME_ID) AS GAME_COUNT FROM "CHRISTY.GEORGE".GAME,"CHRISTY.GEORGE".COMPETITION WHERE
-        COMPETITION_NAME = '${req.query.id}' GROUP BY EXTRACT(YEAR FROM GAME_DATE),COMPETITION_NAME ORDER BY 1`
+        `SELECT COMPETITION_NAME,A.CID,A.YEAR,A.GOALS,A.GAME_COUNT FROM 
+        (SELECT COMPETITION_ID AS CID,EXTRACT(YEAR FROM GAME_DATE) YEAR, SUM(HOME_CLUB_GOALS + AWAY_CLUB_GOALS)AS GOALS , COUNT(GAME_ID) AS GAME_COUNT FROM "CHRISTY.GEORGE".GAME 
+        WHERE COMPETITION_ID = '${req.query.id}' GROUP BY EXTRACT(YEAR FROM GAME_DATE),COMPETITION_ID) A,"CHRISTY.GEORGE".COMPETITION WHERE COMPETITION.COMPETITION_ID=A.CID order by 3`
         // `SELECT EXTRACT(YEAR FROM GAME_DATE) YEAR, SUM(HOME_CLUB_GOALS + AWAY_CLUB_GOALS)AS GOALS , COUNT(GAME_ID) AS GAME_COUNT FROM "CHRISTY.GEORGE".GAME WHERE COMPETITION_ID ='${req.query.id}'  GROUP BY EXTRACT(YEAR FROM GAME_DATE) ORDER BY 1
         // `
       );

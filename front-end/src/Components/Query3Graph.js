@@ -8,6 +8,8 @@ const Query2Graph = ({
   graph2Data,
   graph1Count,
   graph2Count,
+  comp1,
+  comp2,
 }) => {
   //   console.log(labels, graphGA, graphEMV);
 
@@ -36,28 +38,28 @@ const Query2Graph = ({
     datasets: [
       {
         type: "line",
-        label: "Competition 1",
+        label: comp1,
         data: graph1Data,
         backgroundColor: "rgb(231, 76, 60)",
         borderColor: "rgb(231, 76, 60)",
       },
       {
         type: "line",
-        label: "Competition 2",
+        label: comp2,
         data: graph2Data,
         backgroundColor: "rgb(41, 128, 185  )",
         borderColor: "rgb(41, 128, 185  )",
       },
       {
         type: "bar",
-        label: "Games in Competition 1",
+        label: "Games in " + comp1,
         data: graph1Count,
         backgroundColor: "rgb(231, 76, 60)",
         borderColor: "rgb(231, 76, 60)",
       },
       {
         type: "bar",
-        label: "Games in Competition 2",
+        label: "Games in " + comp2,
         data: graph2Count,
         backgroundColor: "rgb(41, 128, 185  )",
         borderColor: "rgb(41, 128, 185  )",

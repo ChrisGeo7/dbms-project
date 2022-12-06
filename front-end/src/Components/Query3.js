@@ -68,7 +68,7 @@ const ClubList = (props) => {
               <option>Select Competition 1</option>
               {competitionList.length > 0 &&
                 competitionList.map((item, i) => (
-                  <option value={item.COMPETITION_NAME}>
+                  <option value={item.COMPETITION_ID}>
                     {item.COMPETITION_NAME}
                   </option>
                 ))}
@@ -87,7 +87,7 @@ const ClubList = (props) => {
                 <option>Select Competition 2</option>
                 {competitionList.length > 0 &&
                   competitionList.map((item, i) => (
-                    <option value={item.COMPETITION_NAME}>
+                    <option value={item.COMPETITION_ID}>
                       {item.COMPETITION_NAME}
                     </option>
                   ))}
@@ -133,6 +133,8 @@ const ClubList = (props) => {
             graph2Data={arr2Goals}
             graph1Count={gCount1}
             graph2Count={gCount2}
+            comp1={gen1Data[0].COMPETITION_NAME}
+            comp2={gen2Data[0].COMPETITION_NAME}
           />
         )}
       </Container>
