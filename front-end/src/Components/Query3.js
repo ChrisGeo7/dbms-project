@@ -7,6 +7,7 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Query3Graph from "./Query3Graph";
 import TopNav from "./TopNav";
+import "./style.css";
 
 const ClubList = (props) => {
   const [competitionList, setCompetitionList] = useState([]);
@@ -21,6 +22,8 @@ const ClubList = (props) => {
   var arrLabels = [];
   var arr1Goals = [];
   var arr2Goals = [];
+  var gCount1 = [];
+  var gCount2 = [];
 
   useEffect(() => {
     axios("http://localhost:5000/competitions")
@@ -36,10 +39,12 @@ const ClubList = (props) => {
   gen1Data.forEach(function (gen1Data) {
     arrLabels.push(gen1Data.YEAR);
     arr1Goals.push(gen1Data.GOALS);
+    gCount1.push(gen1Data.GAME_COUNT);
   });
 
   gen2Data.forEach(function (gen2Data) {
     arr2Goals.push(gen2Data.GOALS);
+    gCount2.push(gen2Data.GAME_COUNT);
   });
 
   return (
@@ -63,7 +68,7 @@ const ClubList = (props) => {
               <option>Select Competition 1</option>
               {competitionList.length > 0 &&
                 competitionList.map((item, i) => (
-                  <option value={item.COMPETITION_ID}>
+                  <option value={item.COMPETITION_NAME}>
                     {item.COMPETITION_NAME}
                   </option>
                 ))}
@@ -82,7 +87,7 @@ const ClubList = (props) => {
                 <option>Select Competition 2</option>
                 {competitionList.length > 0 &&
                   competitionList.map((item, i) => (
-                    <option value={item.COMPETITION_ID}>
+                    <option value={item.COMPETITION_NAME}>
                       {item.COMPETITION_NAME}
                     </option>
                   ))}
@@ -92,6 +97,7 @@ const ClubList = (props) => {
           {buttonFlag && (
             <Col>
               <Button
+                className="gen-btn shadow"
                 onClick={() => {
                   axios(`http://localhost:5000/query3/?id=${competition1Id}`)
                     .then((response) => {
@@ -125,6 +131,8 @@ const ClubList = (props) => {
             labels={arrLabels}
             graph1Data={arr1Goals}
             graph2Data={arr2Goals}
+            graph1Count={gCount1}
+            graph2Count={gCount2}
           />
         )}
       </Container>

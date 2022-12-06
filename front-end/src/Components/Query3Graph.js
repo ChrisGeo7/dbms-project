@@ -1,8 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import "chart.js/auto";
 import { Chart } from "react-chartjs-2";
 
-const Query2Graph = ({ labels, graph1Data, graph2Data }) => {
+const Query2Graph = ({
+  labels,
+  graph1Data,
+  graph2Data,
+  graph1Count,
+  graph2Count,
+}) => {
   //   console.log(labels, graphGA, graphEMV);
 
   const options = {
@@ -12,7 +18,9 @@ const Query2Graph = ({ labels, graph1Data, graph2Data }) => {
         text: "",
       },
     },
+
     responsive: true,
+    maintainAspectRatio: true,
     scales: {
       x: {
         stacked: false,
@@ -27,15 +35,30 @@ const Query2Graph = ({ labels, graph1Data, graph2Data }) => {
     labels: labels,
     datasets: [
       {
+        type: "line",
         label: "Competition 1",
         data: graph1Data,
         backgroundColor: "rgb(231, 76, 60)",
         borderColor: "rgb(231, 76, 60)",
       },
       {
+        type: "line",
         label: "Competition 2",
         data: graph2Data,
-        // data: [54, 53, 42, 54, 53, 42, 54, 53, 42],
+        backgroundColor: "rgb(41, 128, 185  )",
+        borderColor: "rgb(41, 128, 185  )",
+      },
+      {
+        type: "bar",
+        label: "Games in Competition 1",
+        data: graph1Count,
+        backgroundColor: "rgb(231, 76, 60)",
+        borderColor: "rgb(231, 76, 60)",
+      },
+      {
+        type: "bar",
+        label: "Games in Competition 2",
+        data: graph2Count,
         backgroundColor: "rgb(41, 128, 185  )",
         borderColor: "rgb(41, 128, 185  )",
       },
@@ -43,7 +66,7 @@ const Query2Graph = ({ labels, graph1Data, graph2Data }) => {
   };
   return (
     <div height="100">
-      <Chart type="line" data={data} options={options} />
+      <Chart data={data} options={options} />
     </div>
   );
 };

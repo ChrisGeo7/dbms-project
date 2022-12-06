@@ -6,7 +6,11 @@ const Home = (props) => {
     <>
       <TopNav />
       <Container>
-        <h1>Home</h1>
+        <h1 style={{ fontSize: "100px" }}>
+          <b>Performance Trends</b>
+          <br />
+          in Football across Europe
+        </h1>
       </Container>
     </>
   );

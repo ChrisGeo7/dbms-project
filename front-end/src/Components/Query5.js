@@ -7,6 +7,7 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Query5Graph from "./Query5Graph";
 import TopNav from "./TopNav";
+import "./style.css";
 
 const Query5 = (props) => {
   const [clubList, setClubList] = useState([]);
@@ -84,6 +85,7 @@ const Query5 = (props) => {
           {buttonFlag && (
             <Col>
               <Button
+                className="gen-btn shadow"
                 onClick={() => {
                   axios(`http://localhost:5000/query5/?id=${club1Id}`)
                     .then((response) => {

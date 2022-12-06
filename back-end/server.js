@@ -24,7 +24,44 @@ app.get("/competitions", (req, res) => {
       });
 
       const data = await con.execute(
-        `SELECT * FROM "CHRISTY.GEORGE".COMPETITION`
+        `SELECT * FROM "CHRISTY.GEORGE".COMPETITION ORDER BY COMPETITION_NAME`
+      );
+      return data;
+      oracledb.close();
+    } catch (err) {
+      console.log(err);
+    } finally {
+      if (con) {
+        try {
+          await con.close();
+        } catch (err) {
+          console.error(err);
+        }
+      }
+    }
+  }
+  fetchCompetitions()
+    .then((dbres) => {
+      res.send(dbres);
+    })
+    .catch((err) => {
+      res.send(err);
+    });
+});
+
+app.get("/getcompetitions", (req, res) => {
+  async function fetchCompetitions() {
+    let con;
+
+    try {
+      con = await oracledb.getConnection({
+        user: "omkarparab",
+        password: "8HiVpVxMCvT6eumbL3Esnzi3",
+        connectionString: "oracle.cise.ufl.edu/orcl",
+      });
+
+      const data = await con.execute(
+        `SELECT * FROM "CHRISTY.GEORGE".COMPETITION WHERE COMPETITION_TYPE='domestic_league' ORDER BY COMPETITION_NAME`
       );
       return data;
       oracledb.close();
@@ -61,7 +98,7 @@ app.get("/clubs", (req, res) => {
       });
 
       const data = await con.execute(
-        `SELECT * FROM "CHRISTY.GEORGE".CLUB WHERE DOMESTIC_COMPETITION_ID = '${req.query.id}'`
+        `SELECT * FROM "CHRISTY.GEORGE".CLUB WHERE DOMESTIC_COMPETITION_ID = '${req.query.id}' ORDER BY CLUB_NAME`
       );
       return data;
     } catch (err) {
@@ -133,7 +170,7 @@ app.get("/players", (req, res) => {
       });
 
       const data = await con.execute(
-        `SELECT * FROM "CHRISTY.GEORGE".PLAYER WHERE CURRENT_CLUB_ID = '${req.query.id}'`
+        `SELECT PLAYER_NAME, PLAYER_ID, 2022-EXTRACT(YEAR FROM DATE_OF_BIRTH) AS AGE FROM "CHRISTY.GEORGE".PLAYER WHERE CURRENT_CLUB_ID = '${req.query.id}' ORDER BY PLAYER_NAME`
       );
       return data;
     } catch (err) {
@@ -169,7 +206,7 @@ app.get("/query", (req, res) => {
       });
 
       const data = await con.execute(
-        `SELECT PLAYER_NAME, SUM(GOALS + ASSISTS) AS GOALS FROM "CHRISTY.GEORGE".APPEARANCE WHERE PLAYER_CLUB_ID = ${req.query.id} GROUP BY PLAYER_NAME `
+        `SELECT PLAYER_NAME, SUM(GOALS + ASSISTS) AS GOALS FROM "CHRISTY.GEORGE".APPEARANCE WHERE PLAYER_CLUB_ID = ${req.query.id} GROUP BY PLAYER_NAME  `
       );
       return data;
     } catch (err) {
@@ -278,8 +315,10 @@ app.get("/query3", (req, res) => {
       });
 
       const data = await con.execute(
-        `SELECT EXTRACT(YEAR FROM GAME_DATE) YEAR, SUM(HOME_CLUB_GOALS + AWAY_CLUB_GOALS) AS GOALS FROM "CHRISTY.GEORGE".GAME WHERE COMPETITION_ID = '${req.query.id}' GROUP BY EXTRACT(YEAR FROM GAME_DATE) ORDER BY 1
-        `
+        `SELECT COMPETITION_NAME,EXTRACT(YEAR FROM GAME_DATE) YEAR, SUM(HOME_CLUB_GOALS + AWAY_CLUB_GOALS)AS GOALS , COUNT(GAME_ID) AS GAME_COUNT FROM "CHRISTY.GEORGE".GAME,"CHRISTY.GEORGE".COMPETITION WHERE
+        COMPETITION_NAME = '${req.query.id}' GROUP BY EXTRACT(YEAR FROM GAME_DATE),COMPETITION_NAME ORDER BY 1`
+        // `SELECT EXTRACT(YEAR FROM GAME_DATE) YEAR, SUM(HOME_CLUB_GOALS + AWAY_CLUB_GOALS)AS GOALS , COUNT(GAME_ID) AS GAME_COUNT FROM "CHRISTY.GEORGE".GAME WHERE COMPETITION_ID ='${req.query.id}'  GROUP BY EXTRACT(YEAR FROM GAME_DATE) ORDER BY 1
+        // `
       );
       return data;
     } catch (err) {
@@ -563,6 +602,49 @@ app.get("/query5", (req, res) => {
     }
   }
   fetchQuery5()
+    .then((dbres) => {
+      res.send(dbres);
+    })
+    .catch((err) => {
+      res.send(err);
+    });
+});
+
+app.get("/query6", (req, res) => {
+  async function fetchQuery6() {
+    let con;
+
+    try {
+      con = await oracledb.getConnection({
+        user: "omkarparab",
+        password: "8HiVpVxMCvT6eumbL3Esnzi3",
+        connectionString: "oracle.cise.ufl.edu/orcl",
+      });
+
+      const data = await con.execute(
+        `select EXTRACT(year from appearance_date) as year, "CHRISTY.GEORGE".player.player_name, sum(goals+assists) from (select EXTRACT(year from appearance_date) as year, player_id, sum(goals+assists) from "CHRISTY.GEORGE".player
+        natural join "CHRISTY.GEORGE".appearance where EXTRACT(year from appearance_date) - EXTRACT(year from date_of_birth) >=22 and
+        country_of_citizenship = 'England' and EXTRACT(year from appearance_date) - EXTRACT(year from date_of_birth) <=25 group by EXTRACT(year from appearance_date), player_id having EXTRACT(year from appearance_date)=2015  order by 1,3 desc fetch first 5 rows only) A, "CHRISTY.GEORGE".player, "CHRISTY.GEORGE".appearance
+        where
+        "CHRISTY.GEORGE".player.player_id = A.player_id and "CHRISTY.GEORGE".player.player_id = "CHRISTY.GEORGE".appearance.player_id
+        group by EXTRACT(year from appearance_date),"CHRISTY.GEORGE".player.player_name having EXTRACT(year from appearance_date) >= 2015 order by 1
+        
+        `
+      );
+      return data;
+    } catch (err) {
+      console.log(err);
+    } finally {
+      if (con) {
+        try {
+          await con.close();
+        } catch (err) {
+          console.error(err);
+        }
+      }
+    }
+  }
+  fetchQuery6()
     .then((dbres) => {
       res.send(dbres);
     })

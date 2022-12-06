@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import axios from "axios";
 import TopNav from "./TopNav";
-import Form from "react-bootstrap/Form";
+import "./style.css";
+
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import Query1Graph from "./Query1Graph";
@@ -37,7 +38,9 @@ const Query1 = (props) => {
       <Container>
         {" "}
         <h5>Trend in number of bookings before and after VAR was introduced</h5>
-        <Button onClick={() => setFlag(true)}>Generate</Button>
+        <Button className="gen-btn shadow" onClick={() => setFlag(true)}>
+          Generate
+        </Button>
         {flag && (
           <Query1Graph
             labels={arrLabels}

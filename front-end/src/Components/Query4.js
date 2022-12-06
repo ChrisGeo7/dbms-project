@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
-import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Query4Graph from "./Query4Graph";
 import TopNav from "./TopNav";
+import "./style.css";
 
 const Query4 = (props) => {
   const [gbData, setGbData] = useState([]);
@@ -93,10 +91,12 @@ const Query4 = (props) => {
       <Container>
         {" "}
         <h5>
-          Graph of Average performance of Domestic League teams in European
+          Graph of average performance of Top 5 Domestic Leagues in European
           Competitions.
         </h5>
-        <Button onClick={() => setFlag(true)}>Generate</Button>
+        <Button className="gen-btn shadow" onClick={() => setFlag(true)}>
+          Generate
+        </Button>
         {flag && (
           <Query4Graph
             labels={arrLabels}

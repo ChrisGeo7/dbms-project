@@ -7,6 +7,7 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Query2Graph from "./Query2Graph";
 import TopNav from "./TopNav";
+import "./style.css";
 
 const Query2 = (props) => {
   const [competitionList, setCompetitionList] = useState([]);
@@ -25,7 +26,7 @@ const Query2 = (props) => {
   var arrEMV = [];
 
   useEffect(() => {
-    axios("http://localhost:5000/competitions")
+    axios("http://localhost:5000/getcompetitions")
       .then((response) => {
         if (response.status === 200) {
           setCompetitionList(response.data.rows);
@@ -121,7 +122,12 @@ const Query2 = (props) => {
                 <option>Select Player</option>
                 {playerList.length > 0 &&
                   playerList.map((item, i) => (
-                    <option value={item.PLAYER_ID}>{item.PLAYER_NAME}</option>
+                    <option value={item.PLAYER_ID}>
+                      {item.PLAYER_NAME}{" "}
+                      <span style={{ marginLeft: "auto", marginRight: "0" }}>
+                        {item.AGE}
+                      </span>
+                    </option>
                   ))}
               </Form.Select>
             </Col>
@@ -129,6 +135,7 @@ const Query2 = (props) => {
           {buttonFlag && (
             <Col>
               <Button
+                className="gen-btn shadow"
                 onClick={() => {
                   axios(`http://localhost:5000/query2/?id=${playerId}`)
                     .then((response) => {

@@ -6,11 +6,10 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
-const ClubList = (props) => {
+const ClubList = () => {
   const [data, setData] = React.useState([]);
   const [genData, setGenData] = useState([]);
   const [clubId, setClubId] = useState();
-  const [labels, setlabels] = useState([]);
   const [flag, setFlag] = useState(false);
   var arrLabels = [];
   var arrData = [];

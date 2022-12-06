@@ -1,4 +1,3 @@
-import CompetitionList from "./Components/CompetitionList";
 import { Route, Routes } from "react-router-dom";
 import Agent from "./Components/Agent";
 import Public from "./Components/Public";
@@ -8,6 +7,7 @@ import Query2 from "./Components/Query2";
 import Query3 from "./Components/Query3";
 import Query4 from "./Components/Query4";
 import Query5 from "./Components/Query5";
+import "./App.css";
 
 function App() {
   return (

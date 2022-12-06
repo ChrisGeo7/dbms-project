@@ -12,6 +12,7 @@ const Query1Graph = ({ labels, graphRed, graphYellow }) => {
         text: "",
       },
     },
+
     responsive: true,
     scales: {
       x: {
@@ -29,13 +30,12 @@ const Query1Graph = ({ labels, graphRed, graphYellow }) => {
       {
         label: "Yellow",
         data: graphYellow,
-        backgroundColor: "rgb(255, 195, 0)",
+        backgroundColor: "#FFCA48",
       },
       {
         label: "Red",
         data: graphRed,
-        // data: [54, 53, 42, 54, 53, 42, 54, 53, 42],
-        backgroundColor: "rgb(199, 0, 57)",
+        backgroundColor: "rgb(231, 76, 60)",
       },
     ],
   };

@@ -1,0 +1,30 @@
+.color-nav {
+  background-color: #3aafa9;
+}
+
+.f-color {
+  color: #feffff !important;
+}
+
+.btn-color {
+  background-color: #3aafa9 !important;
+  color: #ffffff;
+  -webkit-tap-highlight-color: transparent;
+}
+.btn-color:focus {
+  outline: 0;
+}
+
+.gen-btn {
+  background-color: #3aafa9 !important;
+}
+
+.btn-primary {
+  --bs-btn-border-color: #3aafa9 !important ;
+}
+.btn-primary:hover {
+  border: none;
+}
+.btn-primary:focus {
+  border: none;
+}

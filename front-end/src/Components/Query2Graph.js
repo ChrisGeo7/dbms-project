@@ -33,7 +33,7 @@ const Query2Graph = ({ labels, graphGA, graphEMV }) => {
         borderColor: "rgb(231, 76, 60)",
       },
       {
-        label: "Market Valuation",
+        label: "Market Valuation in Millions",
         data: graphEMV,
         // data: [54, 53, 42, 54, 53, 42, 54, 53, 42],
         backgroundColor: "rgb(41, 128, 185  )",
