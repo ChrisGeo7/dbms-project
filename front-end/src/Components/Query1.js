@@ -116,16 +116,18 @@ const Query1 = (props) => {
         <br />
         <br />
         <br />
-        <h5>
-          Trend in number of bookings before and after VAR was introduced in all
-          leagues combined
-        </h5>
         {flag && (
-          <Query1Graph
-            labels={arrLabels}
-            graphRed={arrRed}
-            graphYellow={arrYellow}
-          />
+          <>
+            <h5>
+              Trend in number of bookings before and after VAR was introduced in
+              all leagues combined
+            </h5>
+            <Query1Graph
+              labels={arrLabels}
+              graphRed={arrRed}
+              graphYellow={arrYellow}
+            />
+          </>
         )}
       </Container>
       {console.log("genData", genData)}

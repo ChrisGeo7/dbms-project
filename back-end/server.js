@@ -648,7 +648,7 @@ app.get("/query5", (req, res) => {
     });
 });
 
-app.get("/query6", (req, res) => {
+app.get("/query61", (req, res) => {
   async function fetchQuery6() {
     let con;
 
@@ -660,13 +660,46 @@ app.get("/query6", (req, res) => {
       });
 
       const data = await con.execute(
-        `select EXTRACT(year from appearance_date) as year, "CHRISTY.GEORGE".player.player_name, sum(goals+assists) from (select EXTRACT(year from appearance_date) as year, player_id, sum(goals+assists) from "CHRISTY.GEORGE".player
-        natural join "CHRISTY.GEORGE".appearance where EXTRACT(year from appearance_date) - EXTRACT(year from date_of_birth) >=22 and
-        country_of_citizenship = 'England' and EXTRACT(year from appearance_date) - EXTRACT(year from date_of_birth) <=25 group by EXTRACT(year from appearance_date), player_id having EXTRACT(year from appearance_date)=2015  order by 1,3 desc fetch first 5 rows only) A, "CHRISTY.GEORGE".player, "CHRISTY.GEORGE".appearance
-        where
-        "CHRISTY.GEORGE".player.player_id = A.player_id and "CHRISTY.GEORGE".player.player_id = "CHRISTY.GEORGE".appearance.player_id
-        group by EXTRACT(year from appearance_date),"CHRISTY.GEORGE".player.player_name having EXTRACT(year from appearance_date) >= 2015 order by 1
-        
+        `
+        SELECT home_club_name,round((sum(is_win)/count(club_games.game_id))*100) as winper,season FROM "CHRISTY.GEORGE".club_games,"CHRISTY.GEORGE".game where club_games.game_id=game.game_id and hosting='Home' and home_club_name='${req.query.id}' group by home_club_name,season order by season
+        `
+      );
+      return data;
+    } catch (err) {
+      console.log(err);
+    } finally {
+      if (con) {
+        try {
+          await con.close();
+        } catch (err) {
+          console.error(err);
+        }
+      }
+    }
+  }
+  fetchQuery6()
+    .then((dbres) => {
+      res.send(dbres);
+    })
+    .catch((err) => {
+      res.send(err);
+    });
+});
+
+app.get("/query62", (req, res) => {
+  async function fetchQuery6() {
+    let con;
+
+    try {
+      con = await oracledb.getConnection({
+        user: "omkarparab",
+        password: "8HiVpVxMCvT6eumbL3Esnzi3",
+        connectionString: "oracle.cise.ufl.edu/orcl",
+      });
+
+      const data = await con.execute(
+        `
+        SELECT away_club_name,round((sum(is_win)/count(club_games.game_id))*100) as winper,season FROM "CHRISTY.GEORGE".club_games,"CHRISTY.GEORGE".game where club_games.game_id=game.game_id and hosting='Away' and away_club_name='${req.query.id}' group by away_club_name,season order by season
         `
       );
       return data;

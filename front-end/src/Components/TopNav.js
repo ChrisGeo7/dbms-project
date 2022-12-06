@@ -35,17 +35,10 @@ const TopNav = () => {
                 <LinkContainer to="/query4">
                   <NavDropdown.Item>European Performance</NavDropdown.Item>
                 </LinkContainer>
-              </NavDropdown>
-              <NavDropdown
-                className="f-color"
-                title="Public"
-                id="basic-nav-dropdown"
-              >
                 <LinkContainer to="/query1">
                   <NavDropdown.Item>Booking Trend</NavDropdown.Item>
                 </LinkContainer>
               </NavDropdown>
-
               <NavDropdown
                 className="f-color"
                 title="Management"
@@ -56,6 +49,9 @@ const TopNav = () => {
                 </LinkContainer>
                 <LinkContainer to="/query5">
                   <NavDropdown.Item>Win Comparison</NavDropdown.Item>
+                </LinkContainer>
+                <LinkContainer to="/query6">
+                  <NavDropdown.Item>Home/Away Performance</NavDropdown.Item>
                 </LinkContainer>
               </NavDropdown>
               <Button

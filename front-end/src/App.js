@@ -7,6 +7,7 @@ import Query2 from "./Components/Query2";
 import Query3 from "./Components/Query3";
 import Query4 from "./Components/Query4";
 import Query5 from "./Components/Query5";
+import Query6 from "./Components/Query6";
 import "./App.css";
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
         <Route path="/query3" element={<Query3 />} />
         <Route path="/query4" element={<Query4 />} />
         <Route path="/query5" element={<Query5 />} />
+        <Route path="/query6" element={<Query6 />} />
       </Routes>
       {/* <CompetitionList /> */}
     </div>
